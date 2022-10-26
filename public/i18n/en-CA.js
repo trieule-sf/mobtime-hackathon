@@ -64,6 +64,8 @@ export const en_CA = {
     turnDurationInMinutes: 'Turn Duration (minutes)',
     mobRolesOrder: `${properCase(nominclature.individual)} Roles/Order`,
     positionHelpText: 'One or more comma separated list of positions',
+    enableRetroAndBreakTimer: 'Enable Retro and Break Timer',
+    totalMobbingSession: 'Total Mobbing Session (minutes)',
     localSettings: 'Local Settings',
     enableTimerSounds: 'Enable timer sounds',
     test: 'Test',
