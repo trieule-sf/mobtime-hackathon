@@ -14,17 +14,6 @@ export const timeRemaining = props => {
   const remainingTime = calculateTimeRemaining(props);
 
   return section({}, [
-    h(
-      'h2',
-      {
-        class: {
-          'text-sm': true,
-          'font-bold': true,
-          'uppercase': true,
-        },
-      },
-      text(props.lang.timeRemaining.remainingTime),
-    ),
 
     h(
       'div',
@@ -48,6 +37,17 @@ export const timeRemaining = props => {
             },
           },
           [
+            h(
+              'h2',
+              {
+                class: {
+                  'text-sm': true,
+                  'font-bold': true,
+                  'uppercase': true,
+                },
+              },
+              text(props.lang.timeRemaining.remainingTime),
+            ),
             h(
               'span',
               {
