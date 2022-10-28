@@ -21,6 +21,7 @@ export const en_CA = {
     startTurn: 'Start Turn',
     resume: 'Resume',
     pause: 'Pause',
+    rotationUntilRetro: 'Rotation Until Retro',
   },
 
   tabs: {
@@ -64,6 +65,7 @@ export const en_CA = {
     turnDurationInMinutes: 'Turn Duration (minutes)',
     mobRolesOrder: `${properCase(nominclature.individual)} Roles/Order`,
     positionHelpText: 'One or more comma separated list of positions',
+    totalMobbingSession: 'Total Mobbing Session (minutes)',
     localSettings: 'Local Settings',
     enableTimerSounds: 'Enable timer sounds',
     test: 'Test',
