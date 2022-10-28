@@ -60,6 +60,9 @@ export const timeRemaining = props => {
               'div',
               {
                 class: {
+                  'flex': true,
+                  'items-center': true,
+                  'justify-between': true,
                 },
               },
               [
