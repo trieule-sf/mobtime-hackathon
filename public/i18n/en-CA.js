@@ -21,6 +21,7 @@ export const en_CA = {
     startTurn: 'Start Turn',
     resume: 'Resume',
     pause: 'Pause',
+    rotationUntilRetro: 'Rotation Until Retro'
   },
 
   tabs: {
