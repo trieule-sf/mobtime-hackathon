@@ -38,42 +38,59 @@ export const timeRemaining = props => {
           },
           [
             h(
-              'h2',
+              'div',
               {
-                class: {
-                  'text-sm': true,
-                  'font-bold': true,
-                  'uppercase': true,
-                },
+              class: {},
               },
-              text(props.lang.timeRemaining.remainingTime),
+              [
+                h(
+                  'h2',
+                  {
+                    class: {
+                      'text-sm': true,
+                      'font-bold': true,
+                      'uppercase': true,
+                    },
+                  },
+                  text(props.lang.timeRemaining.remainingTime)
+                )
+              ]
             ),
             h(
-              'span',
+              'div',
               {
                 class: {
-                  'text-6xl': true,
-                  // 'font-extrabold': true,
-                  'leading-none': true,
-                },
-                style: {
-                  fontFamily: "'Working Sans', sans-serif",
                 },
               },
-              text(timerRemainingDisplay(remainingTime)),
-            ),
-            remainingTime > 0 &&
-              deleteButton({
-                size: '24px',
-                onclick: () => [
-                  actions.Completed,
+              [
+                h(
+                  'span',
                   {
-                    isEndOfTurn: false,
-                    documentElement: document,
-                    Notification: window.Notification,
+                    class: {
+                      'text-6xl': true,
+                      // 'font-extrabold': true,
+                      'leading-none': true,
+                    },
+                    style: {
+                      fontFamily: "'Working Sans', sans-serif",
+                    },
                   },
-                ],
-              }),
+                  text(timerRemainingDisplay(remainingTime)),
+                ),
+                remainingTime > 0 &&
+                deleteButton({
+                  size: '24px',
+                  onclick: () => [
+                    actions.Completed,
+                    {
+                      isEndOfTurn: false,
+                      documentElement: document,
+                      Notification: window.Notification,
+                    },
+                  ],
+                }),
+              ],
+            ),
           ],
         ),
 
