@@ -13,6 +13,14 @@ export const timeRemaining = props => {
   const isPaused = props.timerStartedAt === null;
   const remainingTime = calculateTimeRemaining(props);
 
+  props.totalCalculatedRotation = Math.ceil(props.settings.totalMobDuration / props.settings.duration);
+  props.currentRotation = props.totalCalculatedRotation - props.rotationCount
+  if (remainingTime === 0 && props.currentRotation > 0 && props.timerStarted === true){
+    props.currentRotation = props.currentRotation - 1
+    props.rotationCount = props.rotationCount + 1
+    props.timerStarted = false
+  }
+
   return section({}, [
 
     h(
@@ -130,7 +138,7 @@ export const timeRemaining = props => {
                   fontFamily: "'Working Sans', sans-serif",
                 },
               },
-              text("0"),
+              text(props.currentRotation),
             ),
           ]
         ),

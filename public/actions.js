@@ -635,6 +635,7 @@ export const StartTimer = (state, { timerStartedAt, timerDuration }) => [
     timerStartedAt,
     currentTime: timerStartedAt,
     timerDuration,
+    timerStarted: true,
   },
   effects.StartTimer({
     socketEmitter: state.externals.socketEmitter,
