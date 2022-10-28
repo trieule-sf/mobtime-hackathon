@@ -12,19 +12,15 @@ import * as actions from '/actions.js';
 export const timeRemaining = props => {
   const isPaused = props.timerStartedAt === null;
   const remainingTime = calculateTimeRemaining(props);
+  props.totalCalculatedRotation = Math.ceil(props.settings.totalMobDuration / props.settings.duration);
+  props.currentRotation = props.totalCalculatedRotation - props.rotationCount
+  if (remainingTime === 0 && props.currentRotation > 0 && props.timerStarted === true){
+    props.currentRotation = props.currentRotation - 1
+    props.rotationCount = props.rotationCount + 1
+    props.timerStarted = false
+  }
 
   return section({}, [
-    h(
-      'h2',
-      {
-        class: {
-          'text-sm': true,
-          'font-bold': true,
-          'uppercase': true,
-        },
-      },
-      text(props.lang.timeRemaining.remainingTime),
-    ),
 
     h(
       'div',
@@ -38,43 +34,112 @@ export const timeRemaining = props => {
       },
       [
         h(
-          'h3',
+          'div',
           {
             class: {
               'flex': true,
-              'flex-row': true,
+              'flex-col': true,
               'items-start': true,
               'justify-start': true,
             },
           },
           [
             h(
+              'div',
+              {
+              class: {},
+              },
+              [
+                h(
+                  'h2',
+                  {
+                    class: {
+                      'text-sm': true,
+                      'font-bold': true,
+                      'uppercase': true,
+                    },
+                  },
+                  text(props.lang.timeRemaining.remainingTime)
+                )
+              ]
+            ),
+            h(
+              'div',
+              {
+                class: {
+                  'flex': true,
+                  'items-center': true,
+                  'justify-between': true,
+                },
+              },
+              [
+                h(
+                  'span',
+                  {
+                    class: {
+                      'text-6xl': true,
+                      // 'font-extrabold': true,
+                      'leading-none': true,
+                    },
+                    style: {
+                      fontFamily: "'Working Sans', sans-serif",
+                    },
+                  },
+                  text(timerRemainingDisplay(remainingTime)),
+                ),
+                remainingTime > 0 &&
+                deleteButton({
+                  size: '24px',
+                  onclick: () => [
+                    actions.Completed,
+                    {
+                      isEndOfTurn: false,
+                      documentElement: document,
+                      Notification: window.Notification,
+                    },
+                  ],
+                }),
+              ],
+            ),
+          ],
+        ),
+
+        h(
+          'div',
+          {
+            class: {
+              'flex': true,
+              'flex-col': true,
+              'items-center': true,
+              'justify-start': true,
+            },
+          },
+          [
+            h(
+              'h2',
+              {
+                class: {
+                  'text-sm': true,
+                  'font-bold': true,
+                  'uppercase': true,
+                },
+              },
+              text(props.lang.timeRemaining.rotationUntilRetro),
+            ),
+            h(
               'span',
               {
                 class: {
                   'text-6xl': true,
-                  // 'font-extrabold': true,
                   'leading-none': true,
                 },
                 style: {
                   fontFamily: "'Working Sans', sans-serif",
                 },
               },
-              text(timerRemainingDisplay(remainingTime)),
+              text(props.currentRotation),
             ),
-            remainingTime > 0 &&
-              deleteButton({
-                size: '24px',
-                onclick: () => [
-                  actions.Completed,
-                  {
-                    isEndOfTurn: false,
-                    documentElement: document,
-                    Notification: window.Notification,
-                  },
-                ],
-              }),
-          ],
+          ]
         ),
 
         !props.timerDuration &&
