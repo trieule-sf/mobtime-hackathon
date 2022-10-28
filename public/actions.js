@@ -833,6 +833,7 @@ export const UpdateSettings = state => {
       ...state,
       settings,
       pendingSettings: {},
+      rotationCount: 0,
     },
     effects.UpdateSettings({
       socketEmitter: state.externals.socketEmitter,
