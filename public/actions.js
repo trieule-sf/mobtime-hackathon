@@ -37,13 +37,18 @@ const collectionMove = (collection, { from, to }) => {
 
 export const Init = (_, { timerId, externals, dark, lang }) => [
   {
+    timerStarted: false,
     timerStartedAt: null,
     timerDuration: 0,
     mob: [],
     goals: [],
+    rotationCount: 0,
+    currentRotation: 0,
+    totalCalculatedRotation: 0,
     settings: {
       mobOrder: 'Navigator,Driver',
       duration: 5 * 60 * 1000,
+      totalMobDuration: 30,
     },
     expandedReorderable: null,
     timerTab: 'overview',
@@ -624,18 +629,25 @@ export const ResumeTimer = (state, timerStartedAt = Date.now()) => [
   }),
 ];
 
-export const StartTimer = (state, { timerStartedAt, timerDuration }) => [
+export const StartTimer = (state, { timerStartedAt, timerDuration }) => {
+  if(state.currentRotation === 0){
+    state.totalCalculatedRotation = Math.ceil(state.settings.totalMobDuration / state.settings.duration);
+    state.rotationCount = 0;
+  }
+  return[
   {
     ...state,
     timerStartedAt,
     currentTime: timerStartedAt,
     timerDuration,
+    timerStarted: true,
   },
   effects.StartTimer({
     socketEmitter: state.externals.socketEmitter,
     timerDuration,
   }),
-];
+]
+};
 
 export const SetAllowNotification = (state, { allowNotification }) => [
   {
@@ -827,6 +839,7 @@ export const UpdateSettings = state => {
       ...state,
       settings,
       pendingSettings: {},
+      rotationCount: 0,
     },
     effects.UpdateSettings({
       socketEmitter: state.externals.socketEmitter,

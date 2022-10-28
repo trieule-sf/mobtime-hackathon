@@ -142,6 +142,30 @@ export const settings = props =>
             ),
           ],
         ),
+
+        h('div', {}, text(props.lang.settings.totalMobbingSession)),
+        input({
+          name: 'setTotalMobLength',
+          maxlength: 2,
+          pattern: '[1-9]{0,2}',
+          value: toMinutes(value('totalMobDuration', props)),
+          oninput: (_, e) => {
+            e.preventDefault();
+            return [
+              actions.PendingSettingsSet,
+              {
+                key: 'totalMobDuration',
+                value: toSeconds(e.target.value),
+              },
+            ];
+          },
+
+          class: {
+            'hover:border-indigo-300': true,
+            'hover:border-b-solid': true,
+            'w-full': true,
+          },
+        }),
       ],
     ),
 
