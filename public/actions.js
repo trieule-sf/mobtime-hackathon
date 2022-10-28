@@ -37,10 +37,14 @@ const collectionMove = (collection, { from, to }) => {
 
 export const Init = (_, { timerId, externals, dark, lang }) => [
   {
+    timerStarted: false,
     timerStartedAt: null,
     timerDuration: 0,
     mob: [],
     goals: [],
+    rotationCount: 0,
+    currentRotation: 0,
+    totalCalculatedRotation: 0,
     settings: {
       mobOrder: 'Navigator,Driver',
       duration: 5 * 60 * 1000,
