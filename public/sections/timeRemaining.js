@@ -38,11 +38,11 @@ export const timeRemaining = props => {
       },
       [
         h(
-          'h3',
+          'div',
           {
             class: {
               'flex': true,
-              'flex-row': true,
+              'flex-col': true,
               'items-start': true,
               'justify-start': true,
             },
