@@ -97,6 +97,44 @@ export const timeRemaining = props => {
           ],
         ),
 
+        h(
+          'div',
+          {
+            class: {
+              'flex': true,
+              'flex-col': true,
+              'items-center': true,
+              'justify-start': true,
+            },
+          },
+          [
+            h(
+              'h2',
+              {
+                class: {
+                  'text-sm': true,
+                  'font-bold': true,
+                  'uppercase': true,
+                },
+              },
+              text(props.lang.timeRemaining.rotationUntilRetro),
+            ),
+            h(
+              'span',
+              {
+                class: {
+                  'text-6xl': true,
+                  'leading-none': true,
+                },
+                style: {
+                  fontFamily: "'Working Sans', sans-serif",
+                },
+              },
+              text("0"),
+            ),
+          ]
+        ),
+
         !props.timerDuration &&
           button(
             {
