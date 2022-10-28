@@ -629,7 +629,12 @@ export const ResumeTimer = (state, timerStartedAt = Date.now()) => [
   }),
 ];
 
-export const StartTimer = (state, { timerStartedAt, timerDuration }) => [
+export const StartTimer = (state, { timerStartedAt, timerDuration }) => {
+  if(state.currentRotation === 0){
+    state.totalCalculatedRotation = Math.ceil(state.settings.totalMobDuration / state.settings.duration);
+    state.rotationCount = 0;
+  }
+  return[
   {
     ...state,
     timerStartedAt,
@@ -641,7 +646,8 @@ export const StartTimer = (state, { timerStartedAt, timerDuration }) => [
     socketEmitter: state.externals.socketEmitter,
     timerDuration,
   }),
-];
+]
+};
 
 export const SetAllowNotification = (state, { allowNotification }) => [
   {
